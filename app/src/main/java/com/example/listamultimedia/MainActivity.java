@@ -1,5 +1,6 @@
 package com.example.listamultimedia;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -35,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         RVM.setHasFixedSize(true);
 
         listaMultimedia = new ArrayList<>();
-        listaMultimedia.add(new ClaseMultimedia("Video 1", "oceano1", "V"));
-        listaMultimedia.add(new ClaseMultimedia("Video 2", "oceano2", "V"));
+        listaMultimedia.add(new ClaseMultimedia("Video 1", String.valueOf(R.raw.oceano1), "V"));
+        listaMultimedia.add(new ClaseMultimedia("Video 2", String.valueOf(R.raw.oceano2), "V"));
         listaMultimedia.add(new ClaseMultimedia("Audio 1", "url", "A"));
         listaMultimedia.add(new ClaseMultimedia("Audio 2", "url", "A"));
         listaMultimedia.add(new ClaseMultimedia("Web 1", "url", "W"));
@@ -46,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
         RVM.setAdapter(CMAdapter);
 
         CMAdapter.setOnItemClickListener(position -> {
-            DialogFragment dialogFragment = new Dialogo();
-            dialogFragment.show(getSupportFragmentManager(), "Dialogo tarea");
+            if(listaMultimedia.get(position).getTipo().equals("V")) {
+                ClaseMultimedia item = listaMultimedia.get(position);
+                DialogFragment dialogFragment = DialogoMultimedia.newInstance(item);
+                dialogFragment.show(getSupportFragmentManager(), "DialogoMultimedia");
+            }
         });
     }
 }

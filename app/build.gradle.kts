@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.listamultimedia"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.listamultimedia"

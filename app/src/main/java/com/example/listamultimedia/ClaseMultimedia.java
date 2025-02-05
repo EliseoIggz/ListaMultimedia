@@ -1,16 +1,49 @@
 package com.example.listamultimedia;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.VideoView;
 
-public class ClaseMultimedia {
+public class ClaseMultimedia implements Parcelable {
     private String titulo;
-    private String url;
+    private String path;
     private String tipo;
 
     public ClaseMultimedia(String titulo, String url, String tipo) {
         this.titulo = titulo;
-        this.url = url;
+        this.path = url;
         this.tipo = tipo;
+    }
+
+    // Parcelable implementation
+    protected ClaseMultimedia(Parcel in) {
+        titulo = in.readString();
+        path = in.readString();
+        tipo = in.readString();
+    }
+
+    public static final Creator<ClaseMultimedia> CREATOR = new Creator<ClaseMultimedia>() {
+        @Override
+        public ClaseMultimedia createFromParcel(Parcel in) {
+            return new ClaseMultimedia(in);
+        }
+
+        @Override
+        public ClaseMultimedia[] newArray(int size) {
+            return new ClaseMultimedia[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(titulo);
+        dest.writeString(path);
+        dest.writeString(tipo);
     }
 
     public String getTitulo() {
@@ -21,12 +54,12 @@ public class ClaseMultimedia {
         this.titulo = titulo;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPath() {
+        return path;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public String getTipo() {
@@ -36,17 +69,5 @@ public class ClaseMultimedia {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
-//    public  abrirRecurso(){
-//        if(tipo == "V"){
-//            VideoView videoView = findViewById(R.id.videoView);
-//
-//        } else if (tipo == "A") {
-//
-//        } else {
-//
-//        }
-//    }
-
 
 }
