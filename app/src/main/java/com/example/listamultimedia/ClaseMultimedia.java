@@ -1,5 +1,7 @@
 package com.example.listamultimedia;
 
+import android.widget.VideoView;
+
 public class ClaseMultimedia {
     private String titulo;
     private String url;
@@ -34,4 +36,17 @@ public class ClaseMultimedia {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+
+//    public  abrirRecurso(){
+//        if(tipo == "V"){
+//            VideoView videoView = findViewById(R.id.videoView);
+//
+//        } else if (tipo == "A") {
+//
+//        } else {
+//
+//        }
+//    }
+
+
 }

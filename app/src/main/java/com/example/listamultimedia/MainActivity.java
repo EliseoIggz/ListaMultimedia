@@ -7,8 +7,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView RVM;
+    private CMAdapter CMAdapter;
+    private ArrayList<ClaseMultimedia> listaMultimedia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +30,24 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        RVM = findViewById(R.id.RVMulti);
+        RVM.setLayoutManager(new LinearLayoutManager(this));
+        RVM.setHasFixedSize(true);
 
+        listaMultimedia = new ArrayList<>();
+        listaMultimedia.add(new ClaseMultimedia("Video 1", "oceano1", "V"));
+        listaMultimedia.add(new ClaseMultimedia("Video 2", "oceano2", "V"));
+        listaMultimedia.add(new ClaseMultimedia("Audio 1", "url", "A"));
+        listaMultimedia.add(new ClaseMultimedia("Audio 2", "url", "A"));
+        listaMultimedia.add(new ClaseMultimedia("Web 1", "url", "W"));
+        listaMultimedia.add(new ClaseMultimedia("Web 2", "url", "W"));
+
+        CMAdapter = new CMAdapter(listaMultimedia);
+        RVM.setAdapter(CMAdapter);
+
+        CMAdapter.setOnItemClickListener(position -> {
+            DialogFragment dialogFragment = new Dialogo();
+            dialogFragment.show(getSupportFragmentManager(), "Dialogo tarea");
+        });
     }
 }

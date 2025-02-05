@@ -3,6 +3,7 @@ package com.example.listamultimedia;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,15 +38,23 @@ public class CMAdapter extends RecyclerView.Adapter<CMAdapter.ClaseMultimediaVie
     @Override
     public void onBindViewHolder(@NonNull ClaseMultimediaViewHolder holder, int position) {
         ClaseMultimedia archivoMultimedia = listaMultimedia.get(position);
-        holder.titulo.setText(deber.getTitulo());
-        holder.descripcion.setText(deber.getDescripcion());
-        holder.asignatura.setText(deber.getAsignatura());
-        holder.fecha.setText(deber.getFecha());
-        holder.hora.setText(deber.getHora());
-        holder.estado.setText(deber.getEstado());
-
+        holder.tituloTV.setText(archivoMultimedia.getTitulo());
         holder.itemView.setOnClickListener(v -> {
             listener.onItemClick(position);
         });
+    }
+
+    @Override
+    public int getItemCount() {
+        return listaMultimedia.size();
+    }
+
+    public class ClaseMultimediaViewHolder extends RecyclerView.ViewHolder {
+        TextView tituloTV;
+
+        public ClaseMultimediaViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tituloTV = itemView.findViewById(R.id.tituloItem);
+        }
     }
 }
