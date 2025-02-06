@@ -6,19 +6,19 @@ import android.widget.VideoView;
 
 public class ClaseMultimedia implements Parcelable {
     private String titulo;
-    private String path;
+    private int recurso;
     private String tipo;
 
-    public ClaseMultimedia(String titulo, String url, String tipo) {
+    public ClaseMultimedia(String titulo, int recurso, String tipo) {
         this.titulo = titulo;
-        this.path = url;
+        this.recurso = recurso;
         this.tipo = tipo;
     }
 
     // Parcelable implementation
     protected ClaseMultimedia(Parcel in) {
         titulo = in.readString();
-        path = in.readString();
+        recurso = in.readInt();
         tipo = in.readString();
     }
 
@@ -42,7 +42,7 @@ public class ClaseMultimedia implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(titulo);
-        dest.writeString(path);
+        dest.writeInt(recurso);
         dest.writeString(tipo);
     }
 
@@ -54,12 +54,12 @@ public class ClaseMultimedia implements Parcelable {
         this.titulo = titulo;
     }
 
-    public String getPath() {
-        return path;
+    public int getRecurso() {
+        return recurso;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setRecurso(int recurso) {
+        this.recurso = recurso;
     }
 
     public String getTipo() {

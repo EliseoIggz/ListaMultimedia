@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -39,22 +40,24 @@ public class DialogoMultimedia extends DialogFragment {
 
         if (itemSeleccionado != null) {
             String tipo = itemSeleccionado.getTipo();
-            String url = itemSeleccionado.getPath();
+            int recurso = itemSeleccionado.getRecurso();
 
             VideoView videoView = view.findViewById(R.id.videoView);
             WebView webView = view.findViewById(R.id.webView);
 
             if (tipo.equals("V")) {
                 videoView.setVisibility(View.VISIBLE);
-                videoView.setVideoPath("android.resource.raw://" + url);
+                Uri videoUri = Uri.parse("android.resource://" + requireContext().getPackageName() + "/res/raw/" + recurso);
+                Log.d("DialogoMultimedia",videoUri.toString() );
+                videoView.setVideoURI(videoUri);
                 videoView.start();
             } else if (tipo.equals("A")) {
-                Uri uri = Uri.parse("android.resource://" + requireContext().getPackageName() + "/raw/" + url);
+                Uri uri = Uri.parse("android.resource://" + requireContext().getPackageName() + "/" + recurso);
                 mediaPlayer = MediaPlayer.create(getActivity(), uri);
                 mediaPlayer.start();
             } else if (tipo.equals("W")) {
                 webView.setVisibility(View.VISIBLE);
-                webView.loadUrl(url);
+                webView.loadUrl(String.valueOf(recurso));
             }
         }
 

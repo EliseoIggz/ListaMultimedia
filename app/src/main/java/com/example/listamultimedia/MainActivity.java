@@ -2,6 +2,7 @@ package com.example.listamultimedia;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
         RVM.setHasFixedSize(true);
 
         listaMultimedia = new ArrayList<>();
-        listaMultimedia.add(new ClaseMultimedia("Video 1", String.valueOf(R.raw.oceano1), "V"));
-        listaMultimedia.add(new ClaseMultimedia("Video 2", String.valueOf(R.raw.oceano2), "V"));
-        listaMultimedia.add(new ClaseMultimedia("Audio 1", "url", "A"));
-        listaMultimedia.add(new ClaseMultimedia("Audio 2", "url", "A"));
-        listaMultimedia.add(new ClaseMultimedia("Web 1", "url", "W"));
-        listaMultimedia.add(new ClaseMultimedia("Web 2", "url", "W"));
+        listaMultimedia.add(new ClaseMultimedia("Video 1", R.raw.oceano1, "V"));
+        listaMultimedia.add(new ClaseMultimedia("Video 2", R.raw.oceano2, "V"));
+        listaMultimedia.add(new ClaseMultimedia("Audio 1", R.raw.oceano1, "A"));
+        listaMultimedia.add(new ClaseMultimedia("Audio 2", R.raw.oceano2, "A"));
+        //listaMultimedia.add(new ClaseMultimedia("Web 1", "url", "W"));
+        //listaMultimedia.add(new ClaseMultimedia("Web 2", "url", "W"));
 
         CMAdapter = new CMAdapter(listaMultimedia);
         RVM.setAdapter(CMAdapter);
