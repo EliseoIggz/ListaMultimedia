@@ -37,18 +37,26 @@ public class MainActivity extends AppCompatActivity {
         RVM.setHasFixedSize(true);
 
         listaMultimedia = new ArrayList<>();
-        listaMultimedia.add(new ClaseMultimedia("Video 1", R.raw.oceano1, "V"));
-        listaMultimedia.add(new ClaseMultimedia("Video 2", R.raw.oceano2, "V"));
-        listaMultimedia.add(new ClaseMultimedia("Audio 1", R.raw.oceano1, "A"));
-        listaMultimedia.add(new ClaseMultimedia("Audio 2", R.raw.oceano2, "A"));
-        //listaMultimedia.add(new ClaseMultimedia("Web 1", "url", "W"));
-        //listaMultimedia.add(new ClaseMultimedia("Web 2", "url", "W"));
+        listaMultimedia.add(new ClaseMultimedia("Video 1", String.valueOf(R.raw.oceano1), "V"));
+        listaMultimedia.add(new ClaseMultimedia("Video 2", String.valueOf(R.raw.oceano2), "V"));
+        listaMultimedia.add(new ClaseMultimedia("Audio 1", String.valueOf(R.raw.tigre), "A"));
+        listaMultimedia.add(new ClaseMultimedia("Audio 2", String.valueOf(R.raw.gallina), "A"));
+        listaMultimedia.add(new ClaseMultimedia("Youtube", "https://es.wikipedia.org/wiki/Wikipedia:Portada", "W"));
+        listaMultimedia.add(new ClaseMultimedia("X (Twitter)", "https://www.nationalgeographic.es/animales", "W"));
 
         CMAdapter = new CMAdapter(listaMultimedia);
         RVM.setAdapter(CMAdapter);
 
         CMAdapter.setOnItemClickListener(position -> {
             if(listaMultimedia.get(position).getTipo().equals("V")) {
+                ClaseMultimedia item = listaMultimedia.get(position);
+                DialogFragment dialogFragment = DialogoMultimedia.newInstance(item);
+                dialogFragment.show(getSupportFragmentManager(), "DialogoMultimedia");
+            } else if(listaMultimedia.get(position).getTipo().equals("A")) {
+                ClaseMultimedia item = listaMultimedia.get(position);
+                DialogFragment dialogFragment = DialogoMultimedia.newInstance(item);
+                dialogFragment.show(getSupportFragmentManager(), "DialogoMultimedia");
+            } else if(listaMultimedia.get(position).getTipo().equals("W")) {
                 ClaseMultimedia item = listaMultimedia.get(position);
                 DialogFragment dialogFragment = DialogoMultimedia.newInstance(item);
                 dialogFragment.show(getSupportFragmentManager(), "DialogoMultimedia");

@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
@@ -40,24 +42,34 @@ public class DialogoMultimedia extends DialogFragment {
 
         if (itemSeleccionado != null) {
             String tipo = itemSeleccionado.getTipo();
-            int recurso = itemSeleccionado.getRecurso();
+            String recurso = itemSeleccionado.getRecurso();
 
             VideoView videoView = view.findViewById(R.id.videoView);
             WebView webView = view.findViewById(R.id.webView);
 
+            videoView.setVisibility(View.INVISIBLE);
+            webView.setVisibility(View.INVISIBLE);
+
+            Log.d("DialogoMultimedia", "HOLA BUEBNAS");
+
+
             if (tipo.equals("V")) {
                 videoView.setVisibility(View.VISIBLE);
-                Uri videoUri = Uri.parse("android.resource://" + requireContext().getPackageName() + "/res/raw/" + recurso);
-                Log.d("DialogoMultimedia",videoUri.toString() );
-                videoView.setVideoURI(videoUri);
+                //Uri videoUri = Uri.parse("android.resource://" + requireContext().getPackageName() + "/res/raw/" + recurso);
+                Log.d("DialogoMultimedia","android.resource://" + getContext().getPackageName() + "/" + recurso);
+                videoView.setVideoPath("android.resource://" + getContext().getPackageName() + "/" + recurso);
                 videoView.start();
             } else if (tipo.equals("A")) {
-                Uri uri = Uri.parse("android.resource://" + requireContext().getPackageName() + "/" + recurso);
+                Uri uri = Uri.parse("android.resource://" + getContext().getPackageName() + "/" + recurso);
+                Log.d("DialogoMultimedia","android.resource://" + getContext().getPackageName() + "/" + recurso);
                 mediaPlayer = MediaPlayer.create(getActivity(), uri);
                 mediaPlayer.start();
             } else if (tipo.equals("W")) {
                 webView.setVisibility(View.VISIBLE);
-                webView.loadUrl(String.valueOf(recurso));
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.setWebViewClient(new WebViewClient());
+                webView.setWebChromeClient(new WebChromeClient());
+                webView.loadUrl(recurso);
             }
         }
 
