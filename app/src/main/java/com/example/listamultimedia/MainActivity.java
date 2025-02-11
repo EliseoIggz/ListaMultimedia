@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         listaMultimedia.add(new ClaseMultimedia("Audio 1", String.valueOf(R.raw.tigre), "A"));
         listaMultimedia.add(new ClaseMultimedia("Audio 2", String.valueOf(R.raw.gallina), "A"));
         listaMultimedia.add(new ClaseMultimedia("Youtube", "https://es.wikipedia.org/wiki/Wikipedia:Portada", "W"));
-        listaMultimedia.add(new ClaseMultimedia("X (Twitter)", "https://www.nationalgeographic.es/animales", "W"));
+        listaMultimedia.add(new ClaseMultimedia("NatGeo", "https://www.nationalgeographic.es/animales", "W"));
 
         CMAdapter = new CMAdapter(listaMultimedia);
         RVM.setAdapter(CMAdapter);
